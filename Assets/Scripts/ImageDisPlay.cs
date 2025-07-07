@@ -18,6 +18,7 @@ public class ImageDisPlay : MonoBehaviour
 			if (hit.collider.gameObject.CompareTag("TemporaryGrid"))
 			{
 				image.SetActive(true);
+
 				Debug.Log(hit.point);
 				Debug.Log("‰æ‘œ‚Ì•\Ž¦");
 			}
