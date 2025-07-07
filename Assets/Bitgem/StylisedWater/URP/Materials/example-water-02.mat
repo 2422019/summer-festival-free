@@ -41,8 +41,8 @@ Material:
     - _WaveFrequency: 2.75
     - _WaveSpeed: 1.75
     m_Colors:
-    - Color_7D9A58EC: {r: 0.049127813, g: 0.21262987, b: 0.4528302, a: 0.9843137}
-    - Color_F01C36BF: {r: 0.09656405, g: 0.46262187, b: 0.6603774, a: 0}
+    - Color_7D9A58EC: {r: 1, g: 0.9277179, b: 0, a: 0.9843137}
+    - Color_F01C36BF: {r: 1, g: 0.54592454, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &5702210360403225776
 MonoBehaviour:
