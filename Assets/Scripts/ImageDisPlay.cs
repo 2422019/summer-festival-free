@@ -19,7 +19,7 @@ public class ImageDisPlay : MonoBehaviour
 			{
 				image.SetActive(true);
 
-				Debug.Log(hit.point);
+				//Debug.Log(hit.point);
 				Debug.Log("‰æ‘œ‚Ì•\Ž¦");
 			}
 		}

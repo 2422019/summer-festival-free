@@ -20,6 +20,12 @@ public class GameController : MonoBehaviour
 	private Camera camera_object;
 	private RaycastHit hit;
 
+	//　回転角速度
+	[SerializeField] private Vector3 angleVelocity;
+
+	// 成功フラグ
+	//bool success = false;
+
 	void Start()
 	{
 		// カメラ情報を取得
@@ -29,7 +35,7 @@ public class GameController : MonoBehaviour
 		InitializeArray();
 
 		// デバッグ用
-		DebugArray();
+		//DebugArray();
 	}
 
 	void Update()
@@ -52,16 +58,32 @@ public class GameController : MonoBehaviour
 					squares[z, x] = ENPTY;
 
 					// ドーナツを出力
+					//success = true;
 					GameObject donut = Instantiate(donutObj);
 					donut.transform.position = hit.collider.gameObject.transform.position;
+					Debug.Log("ドーナツ生成");
 				}
 
+				if(hit.collider.gameObject.CompareTag("Donut"))
+				{
+					transform.localEulerAngles += angleVelocity * Time.deltaTime;
+					Debug.Log("回転");
+				}
+
+				else if(donutObj.activeSelf == true)
+				{
+					Debug.Log("既に存在します");
+					return;
+				}
+
+				/*
 				if (hit.collider.gameObject.CompareTag("Donut"))
 				{
 					hit.transform.Rotate(0, 0, 180);
 					Debug.Log("ドーナツあり");
 					//hit.collider.gameObject.SetActive(false);
 				}
+				*/
 			}
 		}
 	}
@@ -80,6 +102,7 @@ public class GameController : MonoBehaviour
 	}
 
 	// デバッグ用
+	/*
 	private void DebugArray()
 	{
 		for (int i = 0; i < arrayWidth; i++)
@@ -90,4 +113,5 @@ public class GameController : MonoBehaviour
 			}
 		}
 	}
+	*/
 }
