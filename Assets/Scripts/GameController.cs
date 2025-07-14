@@ -52,7 +52,7 @@ public class GameController : MonoBehaviour
 				int x = (int)hit.collider.gameObject.transform.position.x;
 				int z = (int)hit.collider.gameObject.transform.position.z;
 
-				if (squares[z,x] == ENPTY)
+				if (squares[z,x] == ENPTY && hit.collider.gameObject.CompareTag("TemporaryGrid"))
 				{
 					// Squares‚Ì’l‚ğXV
 					squares[z, x] = ENPTY;

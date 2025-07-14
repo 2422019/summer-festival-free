@@ -8,8 +8,34 @@ public class ImageDisPlay : MonoBehaviour
 	[SerializeField]
 	GameObject image;
 
+	Quaternion defaultRotation;
+	Vector3 defaultPos;
+
+	void Start()
+	{
+		defaultPos		= image.transform.localPosition;
+		defaultRotation = image.transform.localRotation;
+	}
+
 	void Update()
 	{
+
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		RaycastHit hit;
+
+		if(Physics.Raycast(ray, out hit))
+		{
+			image.transform.rotation = Quaternion.LookRotation(hit.normal);
+			image.transform.position = hit.point + (hit.normal);
+			Debug.Log("hello word");
+		}
+
+		else
+		{
+			image.transform.localPosition = new Vector3(0, 0, defaultPos.z);
+			image.transform.localRotation = defaultRotation;
+		}
+		/*
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
 
@@ -23,5 +49,6 @@ public class ImageDisPlay : MonoBehaviour
 				Debug.Log("‰æ‘œ‚Ì•\Ž¦");
 			}
 		}
+		*/
 	}
 }
