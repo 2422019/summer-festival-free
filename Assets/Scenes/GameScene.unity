@@ -3890,7 +3890,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   donutObj: {fileID: 8286126402942857303, guid: 5385805cc4795954da1c34cb209ef200,
     type: 3}
-  angleVelocity: {x: 0, y: 0, z: 5}
 --- !u!4 &2013444129
 Transform:
   m_ObjectHideFlags: 0

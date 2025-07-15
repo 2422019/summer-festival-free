@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
 public class TurnOver : MonoBehaviour
 {
 	// ‰ñ“]’†‚µ‚Ä‚¢‚é‚©‚Ìƒtƒ‰ƒO
@@ -37,3 +38,4 @@ public class TurnOver : MonoBehaviour
 		Debug.Log("‰ñ“]I—¹");
 	}
 }
+*/

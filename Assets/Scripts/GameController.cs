@@ -15,13 +15,14 @@ public class GameController : MonoBehaviour
 	private int[,] squares = new int[arrayWidth, arrayHeight];
 
 	private const int ENPTY = 0;
+	private const int PUT = 1;
 
 	// カメラ情報
 	private Camera camera_object;
 	private RaycastHit hit;
 
 	//　回転角速度
-	[SerializeField] private Vector3 angleVelocity;
+	//[SerializeField] private Vector3 angleVelocity;
 
 	// 成功フラグ
 	//bool success = false;
@@ -52,18 +53,23 @@ public class GameController : MonoBehaviour
 				int x = (int)hit.collider.gameObject.transform.position.x;
 				int z = (int)hit.collider.gameObject.transform.position.z;
 
-				if (squares[z,x] == ENPTY && hit.collider.gameObject.CompareTag("TemporaryGrid"))
+				if (squares[z,x] == ENPTY)
 				{
-					// Squaresの値を更新
-					squares[z, x] = ENPTY;
+					if(hit.collider.gameObject.CompareTag("TemporaryGrid") && donutObj)
+					{
+						// Squaresの値を更新
+						squares[z, x] = ENPTY;
 
-					// ドーナツを出力
-					//success = true;
-					GameObject donut = Instantiate(donutObj);
-					donut.transform.position = hit.collider.gameObject.transform.position;
-					Debug.Log("ドーナツ生成");
+						// ドーナツを出力
+						//success = true;
+						GameObject donut = Instantiate(donutObj);
+						donut.transform.position = hit.collider.gameObject.transform.position;
+						Debug.Log("ドーナツ生成");
+					}
+				
 				}
 
+				/*
 				if(hit.collider.gameObject.CompareTag("Donut"))
 				{
 					transform.localEulerAngles += angleVelocity * Time.deltaTime;
