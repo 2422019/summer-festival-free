@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ImageDisPlay : MonoBehaviour
 {
+		/*
 	// ‰æ‘œ
 	[SerializeField]
 	GameObject image;
@@ -35,7 +36,6 @@ public class ImageDisPlay : MonoBehaviour
 			image.transform.localPosition = new Vector3(0, 0, defaultPos.z);
 			image.transform.localRotation = defaultRotation;
 		}
-		/*
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
 
@@ -49,6 +49,6 @@ public class ImageDisPlay : MonoBehaviour
 				Debug.Log("‰æ‘œ‚Ì•\Ž¦");
 			}
 		}
-		*/
 	}
+		*/
 }

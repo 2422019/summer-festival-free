@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/*
+
 public class TurnOver : MonoBehaviour
 {
 	// 回転中しているかのフラグ
@@ -13,15 +13,18 @@ public class TurnOver : MonoBehaviour
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
 
-		if (Physics.Raycast(ray, out hit))
+		if(Input.GetMouseButtonDown(0))
 		{
-			if (hit.collider.gameObject.CompareTag("Donut"))
+			if (Physics.Raycast(ray, out hit))
 			{
-				if (!rotateFlag)
+				if (hit.collider.gameObject.CompareTag("Donut"))
 				{
-					rotateFlag = true;
-					StartCoroutine("RotateMove");
-					Debug.Log("回転開始");
+					if (!rotateFlag)
+					{
+						rotateFlag = true;
+						StartCoroutine("RotateMove");
+						Debug.Log("回転開始");
+					}
 				}
 			}
 		}
@@ -38,4 +41,3 @@ public class TurnOver : MonoBehaviour
 		Debug.Log("回転終了");
 	}
 }
-*/

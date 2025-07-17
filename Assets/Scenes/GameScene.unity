@@ -1392,6 +1392,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 265766274217486953, guid: d3015b7eea383f64d8b81f965cc466e7,
+        type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 265766274217486953, guid: d3015b7eea383f64d8b81f965cc466e7,
+        type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 265766274217486953, guid: d3015b7eea383f64d8b81f965cc466e7,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1991,7 +2006,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03476982f757db84f8f1218b37fa8a53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 1717054216}
 --- !u!4 &925343887
 Transform:
   m_ObjectHideFlags: 0
@@ -3502,6 +3516,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1805605160}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &1819817770 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 265766274217486953, guid: d3015b7eea383f64d8b81f965cc466e7,
+    type: 3}
+  m_PrefabInstance: {fileID: 685578235}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1967138030
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3858,7 +3878,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03476982f757db84f8f1218b37fa8a53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 1717054216}
 --- !u!1 &2013444127
 GameObject:
   m_ObjectHideFlags: 0
@@ -3890,6 +3909,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   donutObj: {fileID: 8286126402942857303, guid: 5385805cc4795954da1c34cb209ef200,
     type: 3}
+  particle: {fileID: 1819817770}
 --- !u!4 &2013444129
 Transform:
   m_ObjectHideFlags: 0

@@ -8,11 +8,16 @@ public class GameController : MonoBehaviour
 	[SerializeField]
 	GameObject donutObj;
 
-	private const int arrayWidth = 10;
-	private const int arrayHeight = 10;
+	// パーティクル
+	[SerializeField]
+	private ParticleSystem particle;
+
+	private const int arrayWidth = 6;
+	private const int arrayHeight = 4;
+
 
 	// 二次元配列
-	private int[,] squares = new int[arrayWidth, arrayHeight];
+	private int[,] squares = new int[arrayHeight, arrayWidth];
 
 	private const int ENPTY = 0;
 	private const int PUT = 1;
@@ -20,9 +25,6 @@ public class GameController : MonoBehaviour
 	// カメラ情報
 	private Camera camera_object;
 	private RaycastHit hit;
-
-	//　回転角速度
-	//[SerializeField] private Vector3 angleVelocity;
 
 	// 成功フラグ
 	//bool success = false;
@@ -36,13 +38,13 @@ public class GameController : MonoBehaviour
 		InitializeArray();
 
 		// デバッグ用
-		//DebugArray();
+		DebugArray();
 	}
 
 	void Update()
 	{
 		// マウスがクリックされた時
-		if(Input.GetMouseButtonDown(0))
+		if (Input.GetMouseButtonDown(0))
 		{
 			// マウスのポジションを取得してRayに代入
 			Ray ray = camera_object.ScreenPointToRay(Input.mousePosition);
@@ -53,12 +55,12 @@ public class GameController : MonoBehaviour
 				int x = (int)hit.collider.gameObject.transform.position.x;
 				int z = (int)hit.collider.gameObject.transform.position.z;
 
-				if (squares[z,x] == ENPTY)
+				if (squares[z, x] == ENPTY)
 				{
-					if(hit.collider.gameObject.CompareTag("TemporaryGrid") && donutObj)
+					if (hit.collider.gameObject.CompareTag("TemporaryGrid"))
 					{
 						// Squaresの値を更新
-						squares[z, x] = ENPTY;
+						squares[z, x] = PUT;
 
 						// ドーナツを出力
 						//success = true;
@@ -66,40 +68,37 @@ public class GameController : MonoBehaviour
 						donut.transform.position = hit.collider.gameObject.transform.position;
 						Debug.Log("ドーナツ生成");
 					}
-				
 				}
 
-				/*
-				if(hit.collider.gameObject.CompareTag("Donut"))
-				{
-					transform.localEulerAngles += angleVelocity * Time.deltaTime;
-					Debug.Log("回転");
-				}
-
-				else if(donutObj.activeSelf == true)
-				{
-					Debug.Log("既に存在します");
-					return;
-				}
-
-				/*
 				if (hit.collider.gameObject.CompareTag("Donut"))
 				{
-					hit.transform.Rotate(0, 0, 180);
 					Debug.Log("ドーナツあり");
-					//hit.collider.gameObject.SetActive(false);
+					hit.collider.gameObject.SetActive(false);
 				}
-				*/
 			}
 		}
+
+		/*
+		// パーティクルプレイ
+		if (success == true)
+		{
+			Debug.Log("パーティクルプレイ");
+			particle.Play();
+		}
+		else if (success == false)
+		{ 
+			Debug.Log("パーティクルストップ");
+			particle.Stop();
+		}
+		*/
 	}
 
 	private void InitializeArray()
 	{
 		// 配列にアクセス
-		for(int i = 0; i < arrayWidth; i++)
+		for(int i = 0; i < arrayHeight; i++)
 		{
-			for(int j = 0; j < arrayHeight; j++)
+			for(int j = 0; j < arrayWidth; j++)
 			{
 				// 配列を空にする
 				squares[i, j] = ENPTY;
@@ -108,16 +107,16 @@ public class GameController : MonoBehaviour
 	}
 
 	// デバッグ用
-	/*
 	private void DebugArray()
 	{
-		for (int i = 0; i < arrayWidth; i++)
+		for (int i = 0; i < arrayHeight; i++)
 		{
-			for (int j = 0; j < arrayHeight; j++)
+			for (int j = 0; j < arrayWidth; j++)
 			{
 				Debug.Log("(i,j) = (" + i + "," + j + ") = " + squares[i, j]);
 			}
 		}
 	}
-	*/
+	
 }
+
