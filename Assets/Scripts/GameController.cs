@@ -12,9 +12,11 @@ public class GameController : MonoBehaviour
 	[SerializeField]
 	private ParticleSystem particle;
 
-	private const int arrayWidth = 6;
-	private const int arrayHeight = 4;
+	// 置く場所
+    [SerializeField] private GameObject gridCellPrefab;
 
+    private const int arrayWidth = 6;
+	private const int arrayHeight = 4;
 
 	// 二次元配列
 	private int[,] squares = new int[arrayHeight, arrayWidth];
@@ -32,16 +34,34 @@ public class GameController : MonoBehaviour
 	void Start()
 	{
 		// カメラ情報を取得
-		camera_object = GameObject.Find("Main Camera").GetComponent<Camera>();
+		camera_object = Camera.main;
 
 		// 配列を初期化
 		InitializeArray();
 
 		// デバッグ用
 		DebugArray();
-	}
 
-	void Update()
+        // 置く場所の自動生成
+        {
+            for (int z = 0; z < arrayHeight; z++)
+            {
+                for (int x = 0; x < arrayWidth; x++)
+                {
+                    Vector3 offset = new Vector3(1f, 0f, 0f);
+                    Vector3 pos = new Vector3(x, 0, z ) + offset;
+                    GameObject cell = Instantiate(gridCellPrefab, pos, Quaternion.identity);
+
+                    GridCell gridCell = cell.GetComponent<GridCell>();
+                    gridCell.gridX = x;
+                    gridCell.gridZ = z;
+                }
+            }
+        }
+
+    }
+
+    void Update()
 	{
 		// マウスがクリックされた時
 		if (Input.GetMouseButtonDown(0))
@@ -52,30 +72,49 @@ public class GameController : MonoBehaviour
 			// マウスのポジションからRayを飛ばして何かに当たったらhitに入れる
 			if (Physics.Raycast(ray, out hit))
 			{
-				int x = (int)hit.collider.gameObject.transform.position.x;
-				int z = (int)hit.collider.gameObject.transform.position.z;
-
-				if (squares[z, x] == ENPTY)
+				if (hit.collider.CompareTag("TemporaryGrid"))
 				{
-					if (hit.collider.gameObject.CompareTag("TemporaryGrid"))
+					GridCell cell = hit.collider.GetComponent<GridCell>();
+					//if (cell == null) return;
+
+					int x = cell.gridX;
+					int z = cell.gridZ;
+
+					if (squares[z, x] == ENPTY)
 					{
-						// Squaresの値を更新
 						squares[z, x] = PUT;
 
-						// ドーナツを出力
-						//success = true;
-						GameObject donut = Instantiate(donutObj);
-						donut.transform.position = hit.collider.gameObject.transform.position;
+                        // ドーナツ生成
+                        float donutHeight = donutObj.GetComponent<Renderer>().bounds.size.y;
+                        Vector3 spawnPos = hit.collider.transform.position + Vector3.up * (donutHeight / 2f);
+                        GameObject donut = Instantiate(donutObj, spawnPos, Quaternion.identity);
+
+                        // ドーナツに位置情報を付与
+                        GridCell donutCell = donut.AddComponent<GridCell>();
+						donutCell.gridX = x;
+						donutCell.gridZ = z;
+						donut.tag = "Donut";
 						Debug.Log("ドーナツ生成");
 					}
-				}
+					else
+					{
+						Debug.Log("すでにドーナツあり");
+					}
 
-				if (hit.collider.gameObject.CompareTag("Donut"))
-				{
-					Debug.Log("ドーナツあり");
-					hit.collider.gameObject.SetActive(false);
 				}
-			}
+                    // ドーナツをクリックした場合
+                else if (hit.collider.CompareTag("Donut"))
+                {
+                    GridCell donutCell = hit.collider.GetComponent<GridCell>();
+                    if (donutCell != null)
+                    {
+                        squares[donutCell.gridZ, donutCell.gridX] = ENPTY;
+                    }
+
+                    Destroy(hit.collider.gameObject);
+                    Debug.Log("ドーナツ削除");
+                }
+            }
 		}
 
 		/*

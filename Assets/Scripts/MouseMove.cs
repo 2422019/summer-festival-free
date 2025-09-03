@@ -13,7 +13,7 @@ public class MouseMove : MonoBehaviour
 		mouse = Input.mousePosition;
 
 		// マウスの位置の確認
-		Debug.Log(mousePos);
+		Debug.Log(mouse);
 
 		// スクリーン座標をワールド座標に変換する
 		target = Camera.main.ScreenToWorldPoint(new Vector3(mouse.x, mouse.y, 10f));
