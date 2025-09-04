@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public class TimeCounter : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class TimeCounter : MonoBehaviour
 
 		if(countdownSeconds <= 0 )
 		{
+			SceneManager.LoadScene("TitleScene");
 			Debug.Log("60•bŒo‰ß‚µ‚Ü‚µ‚½B");
 		}
     }

@@ -48,6 +48,7 @@ public class GameController : MonoBehaviour
             {
                 for (int x = 0; x < arrayWidth; x++)
                 {
+					// 位置調整
                     Vector3 offset = new Vector3(1f, 0f, 0f);
                     Vector3 pos = new Vector3(x, 0, z ) + offset;
                     GameObject cell = Instantiate(gridCellPrefab, pos, Quaternion.identity);
@@ -93,7 +94,7 @@ public class GameController : MonoBehaviour
                         GridCell donutCell = donut.AddComponent<GridCell>();
 						donutCell.gridX = x;
 						donutCell.gridZ = z;
-						donut.tag = "Donut";
+						//donut.tag = "Donut";
 						Debug.Log("ドーナツ生成");
 					}
 					else
